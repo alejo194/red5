@@ -1,0 +1,23 @@
+version: '2'
+services:
+  red5:
+    image: red5-1.0.10
+    container_name: red5
+    hostname: red5
+    ports:
+      - 843:843
+      - 1935:1935
+      - 5080:5080
+      - 5443:5443
+    restart: always
+    volumes:
+      - ./red5/conf:/opt/red5/conf
+      - ./red5/webapps:/opt/red5/webapps
+    working_dir: /opt/red5
+    #command: ["./red5.sh"]
+    #command: ["/bin/bash", "-c", "while true; do echo aa;sleep 15; done"]
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "20m"
+        max-file: "10"
